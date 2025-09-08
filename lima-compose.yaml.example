@@ -1,0 +1,17 @@
+instances:
+  # Simple web server
+  web-01:
+    template: template://debian
+    args: |
+      --cpus 2
+      --memory 2
+      --network lima:user-v2
+      
+  # Database server with custom template
+  db-01:
+    template: template://debian
+    args: |
+      --cpus 2
+      --memory 4
+      --disk 100
+      --network lima:user-v2
