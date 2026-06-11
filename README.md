@@ -119,7 +119,7 @@ $ lima-compose stop [compose-file]
 
 ### ips
 
-Shows IP addresses of all running VMs in `/etc/hosts` format.
+Shows IPv4 addresses of all running VMs in `/etc/hosts` format, one line per interface.
 
 ```bash
 $ lima-compose ips [compose-file]
@@ -127,11 +127,21 @@ $ lima-compose ips [compose-file]
 
 Output example:
 ```
+127.0.0.1       web-01-lo
 192.168.5.15    web-01-eth0
-192.168.5.15    db-01-eth0
+127.0.0.1       db-01-lo
+192.168.5.16    db-01-eth0
 ```
 
 If no compose file is specified, `lima-compose.yaml` or `lima-compose.yml` is used by default.
+
+### version
+
+Shows the version, commit, and build date embedded at build time.
+
+```bash
+$ lima-compose version
+```
 
 ## Usage Examples
 

@@ -7,6 +7,12 @@ import (
 
 const defaultComposeFile = "lima-compose.yaml"
 
+var (
+	version = "dev"
+	commit  = "none"
+	date    = "unknown"
+)
+
 func main() {
 	if len(os.Args) < 2 {
 		printUsage()
@@ -27,6 +33,8 @@ func main() {
 		runStop(args)
 	case "ips":
 		runIps(args)
+	case "version":
+		runVersion()
 	case "help", "-h", "--help":
 		printUsage()
 	default:
@@ -48,6 +56,7 @@ func printUsage() {
 	fmt.Println("  start     Start all instances defined in the compose file")
 	fmt.Println("  stop      Stop all instances defined in the compose file")
 	fmt.Println("  ips       Show IP addresses of all running instances (hosts format)")
+	fmt.Println("  version   Show version information")
 	fmt.Println("  help      Show this help message")
 	fmt.Println()
 	fmt.Println("If compose-file is not specified, 'lima-compose.yaml' will be used.")
@@ -172,6 +181,12 @@ func runStop(args []string) {
 	}
 
 	fmt.Println("\nAll instances stopped successfully.")
+}
+
+func runVersion() {
+	fmt.Printf("lima-compose %s\n", version)
+	fmt.Printf("commit: %s\n", commit)
+	fmt.Printf("date:   %s\n", date)
 }
 
 func runIps(args []string) {
