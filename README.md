@@ -35,49 +35,10 @@ $ go install github.com/zinrai/lima-compose@latest
 
 The configuration file consists of an `instances` section where each VM is defined with:
 
-- **template** (required): The Lima template to use (URL, path, or `template://` reference)
+- **template** (required): The Lima template to use (any form accepted by `limactl create`)
 - **args** (optional): Command-line arguments passed directly to `limactl create`
 
-### Minimal Example
-
-```yaml
-instances:
-  my-vm:
-    template: template://debian
-    args: |
-      --cpus 2
-      --memory 2
-```
-
-### Full Example with Multiple VMs
-
-```yaml
-instances:
-  consul-server-01:
-    template: template://ubuntu-lts
-    args: |
-      --cpus 2
-      --memory 4
-      --disk 50
-      --set '.env.NODE_TYPE="server"'
-      
-  consul-server-02:
-    template: template://ubuntu-lts
-    args: |
-      --cpus 2
-      --memory 4
-      --disk 50
-      --set '.env.NODE_TYPE="server"'
-      
-  consul-client-01:
-    template: template://ubuntu-lts
-    args: |
-      --cpus 4
-      --memory 8
-      --disk 100
-      --mount ~/projects:/projects:w
-      --set '.env.NODE_TYPE="client"'
-```
+See [`lima-compose.yaml.example`](./lima-compose.yaml.example) for a working configuration.
 
 ## Commands
 
