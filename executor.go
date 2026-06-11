@@ -33,8 +33,8 @@ func (e *Executor) CreateInstance(name string, instance Instance) error {
 	return e.runLimactl(args)
 }
 
-// DestroyInstance destroys a Lima VM instance
-func (e *Executor) DestroyInstance(name string) error {
+// DeleteInstance deletes a Lima VM instance
+func (e *Executor) DeleteInstance(name string) error {
 	args := []string{"delete", name}
 	// Let limactl handle the case where instance doesn't exist
 	return e.runLimactl(args)

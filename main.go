@@ -25,8 +25,8 @@ func main() {
 	switch command {
 	case "create":
 		runCreate(args)
-	case "destroy":
-		runDestroy(args)
+	case "delete":
+		runDelete(args)
 	case "start":
 		runStart(args)
 	case "stop":
@@ -52,7 +52,7 @@ func printUsage() {
 	fmt.Println()
 	fmt.Println("Commands:")
 	fmt.Println("  create    Create all instances defined in the compose file")
-	fmt.Println("  destroy   Destroy all instances defined in the compose file")
+	fmt.Println("  delete    Delete all instances defined in the compose file")
 	fmt.Println("  start     Start all instances defined in the compose file")
 	fmt.Println("  stop      Stop all instances defined in the compose file")
 	fmt.Println("  hosts     Show /etc/hosts entries for all running instances")
@@ -105,7 +105,7 @@ func runCreate(args []string) {
 	}
 }
 
-func runDestroy(args []string) {
+func runDelete(args []string) {
 	file := getComposeFile(args)
 	compose, err := LoadCompose(file)
 	if err != nil {
@@ -117,9 +117,9 @@ func runDestroy(args []string) {
 	hasError := false
 
 	for name := range compose.Instances {
-		fmt.Printf("Destroying instance: %s\n", name)
-		if err := executor.DestroyInstance(name); err != nil {
-			fmt.Fprintf(os.Stderr, "Error destroying %s: %v\n", name, err)
+		fmt.Printf("Deleting instance: %s\n", name)
+		if err := executor.DeleteInstance(name); err != nil {
+			fmt.Fprintf(os.Stderr, "Error deleting %s: %v\n", name, err)
 			hasError = true
 			// Continue with other instances
 		}

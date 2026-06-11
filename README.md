@@ -7,7 +7,7 @@ Compose for Lima VMs - A thin wrapper around limactl for declarative multi-VM ma
 lima-compose allows you to define and manage multiple Lima VMs using a YAML file. It acts as a thin wrapper around `limactl`, providing the following capabilities:
 
 - Define multiple VM configurations in a single YAML file
-- Execute batch operations (create/destroy/start/stop) on all defined VMs
+- Execute batch operations (create/delete/start/stop) on all defined VMs
 - Display the exact `limactl` commands being executed
 - Output VM IP addresses in `/etc/hosts` format
 
@@ -16,7 +16,7 @@ Unlike Docker Compose, lima-compose intentionally provides minimal orchestration
 ## Features
 
 - **Declarative YAML configuration** - Define all your VMs in a single file
-- **Batch operations** - Create, start, stop, and destroy all VMs with one command
+- **Batch operations** - Create, start, stop, and delete all VMs with one command
 - **Transparent execution** - See exactly which `limactl` commands are being run
 - **Zero learning curve** - If you know `limactl`, you already know lima-compose
 - **Network information** - ExportVM IP addresses in `/etc/hosts` format
@@ -24,12 +24,6 @@ Unlike Docker Compose, lima-compose intentionally provides minimal orchestration
 ## Prerequisites
 
 [Lima](https://lima-vm.io) installed and `limactl` available in PATH
-
-## Installation
-
-```bash
-$ go install github.com/zinrai/lima-compose@latest
-```
 
 ## YAML Configuration
 
@@ -54,12 +48,12 @@ $ lima-compose create [compose-file]
 - Shows the exact `limactl` command being run
 - Fails if any VM cannot be created
 
-### destroy
+### delete
 
-Destroys all VMs defined in the YAML file.
+Deletes all VMs defined in the YAML file.
 
 ```bash
-$ lima-compose destroy [compose-file]
+$ lima-compose delete [compose-file]
 ```
 
 ### start
@@ -127,8 +121,8 @@ lima-compose stop lima-compose.yaml
 # Start all VMs
 lima-compose start lima-compose.yaml
 
-# Destroy all VMs
-lima-compose destroy lima-compose.yaml
+# Delete all VMs
+lima-compose delete lima-compose.yaml
 ```
 
 ### Distributing hosts Configuration
