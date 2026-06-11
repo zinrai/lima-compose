@@ -9,7 +9,6 @@ lima-compose allows you to define and manage multiple Lima VMs using a YAML file
 - Define multiple VM configurations in a single YAML file
 - Execute batch operations (create/delete/start/stop) on all defined VMs
 - Display the exact `limactl` commands being executed
-- Output VM IP addresses in `/etc/hosts` format
 
 Unlike Docker Compose, lima-compose intentionally provides minimal orchestration features - no service dependencies, no restart policies, and no built-in provisioning. It simply translates YAML definitions into `limactl` commands.
 
@@ -19,7 +18,6 @@ Unlike Docker Compose, lima-compose intentionally provides minimal orchestration
 - **Batch operations** - Create, start, stop, and delete all VMs with one command
 - **Transparent execution** - See exactly which `limactl` commands are being run
 - **Zero learning curve** - If you know `limactl`, you already know lima-compose
-- **Network information** - ExportVM IP addresses in `/etc/hosts` format
 
 ## Prerequisites
 
@@ -72,22 +70,6 @@ Stops all VMs defined in the YAML file.
 $ lima-compose stop [compose-file]
 ```
 
-### hosts
-
-Shows IPv4 addresses of all running VMs in `/etc/hosts` format, one line per interface.
-
-```bash
-$ lima-compose hosts [compose-file]
-```
-
-Output example:
-```
-127.0.0.1       web-01-lo
-192.168.5.15    web-01-eth0
-127.0.0.1       db-01-lo
-192.168.5.16    db-01-eth0
-```
-
 If no compose file is specified, `lima-compose.yaml` or `lima-compose.yml` is used by default.
 
 ### version
@@ -109,9 +91,6 @@ lima-compose create lima-compose.yaml
 # Check status using standard limactl
 limactl list
 
-# Get IP addresses
-lima-compose hosts lima-compose.yaml
-
 # SSH into a specific VM using standard limactl
 limactl shell web-01
 
@@ -123,18 +102,6 @@ lima-compose start lima-compose.yaml
 
 # Delete all VMs
 lima-compose delete lima-compose.yaml
-```
-
-### Distributing hosts Configuration
-
-```bash
-# Get IP addresses and save to file
-lima-compose hosts > /tmp/hosts
-
-# Distribute to all VMs
-for vm in web-01 db-01; do
-  cat /tmp/hosts | limactl shell $vm "sudo tee -a /etc/hosts"
-done
 ```
 
 ## Design Philosophy

@@ -31,8 +31,6 @@ func main() {
 		runStart(args)
 	case "stop":
 		runStop(args)
-	case "hosts":
-		runHosts(args)
 	case "version":
 		runVersion()
 	case "help", "-h", "--help":
@@ -55,7 +53,6 @@ func printUsage() {
 	fmt.Println("  delete    Delete all instances defined in the compose file")
 	fmt.Println("  start     Start all instances defined in the compose file")
 	fmt.Println("  stop      Stop all instances defined in the compose file")
-	fmt.Println("  hosts     Show /etc/hosts entries for all running instances")
 	fmt.Println("  version   Show version information")
 	fmt.Println("  help      Show this help message")
 	fmt.Println()
@@ -187,15 +184,4 @@ func runVersion() {
 	fmt.Printf("lima-compose %s\n", version)
 	fmt.Printf("commit: %s\n", commit)
 	fmt.Printf("date:   %s\n", date)
-}
-
-func runHosts(args []string) {
-	file := getComposeFile(args)
-	compose, err := LoadCompose(file)
-	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error loading compose file: %v\n", err)
-		os.Exit(1)
-	}
-
-	PrintHostsFormat(compose)
 }
