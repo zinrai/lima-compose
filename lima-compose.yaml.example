@@ -1,17 +1,35 @@
 instances:
-  # Simple web server
-  web-01:
-    template: template://debian
+  consul-server-01:
+    template: template:debian
     args: |
       --cpus 2
       --memory 2
       --network lima:user-v2
-      
-  # Database server with custom template
-  db-01:
-    template: template://debian
+
+  consul-server-02:
+    template: template:debian
     args: |
       --cpus 2
-      --memory 4
-      --disk 100
+      --memory 2
+      --network lima:user-v2
+
+  consul-server-03:
+    template: template:debian
+    args: |
+      --cpus 2
+      --memory 2
+      --network lima:user-v2
+
+  consul-server-04:
+    template: template:debian
+    args: |
+      --cpus 2
+      --memory 2
+      --network lima:user-v2
+
+  consul-server-05:
+    template: template:debian
+    args: |
+      --cpus 2
+      --memory 2
       --network lima:user-v2
