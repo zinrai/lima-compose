@@ -31,8 +31,8 @@ func main() {
 		runStart(args)
 	case "stop":
 		runStop(args)
-	case "ips":
-		runIps(args)
+	case "hosts":
+		runHosts(args)
 	case "version":
 		runVersion()
 	case "help", "-h", "--help":
@@ -55,7 +55,7 @@ func printUsage() {
 	fmt.Println("  destroy   Destroy all instances defined in the compose file")
 	fmt.Println("  start     Start all instances defined in the compose file")
 	fmt.Println("  stop      Stop all instances defined in the compose file")
-	fmt.Println("  ips       Show IP addresses of all running instances (hosts format)")
+	fmt.Println("  hosts     Show /etc/hosts entries for all running instances")
 	fmt.Println("  version   Show version information")
 	fmt.Println("  help      Show this help message")
 	fmt.Println()
@@ -189,7 +189,7 @@ func runVersion() {
 	fmt.Printf("date:   %s\n", date)
 }
 
-func runIps(args []string) {
+func runHosts(args []string) {
 	file := getComposeFile(args)
 	compose, err := LoadCompose(file)
 	if err != nil {

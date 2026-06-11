@@ -78,12 +78,12 @@ Stops all VMs defined in the YAML file.
 $ lima-compose stop [compose-file]
 ```
 
-### ips
+### hosts
 
 Shows IPv4 addresses of all running VMs in `/etc/hosts` format, one line per interface.
 
 ```bash
-$ lima-compose ips [compose-file]
+$ lima-compose hosts [compose-file]
 ```
 
 Output example:
@@ -116,7 +116,7 @@ lima-compose create lima-compose.yaml
 limactl list
 
 # Get IP addresses
-lima-compose ips lima-compose.yaml
+lima-compose hosts lima-compose.yaml
 
 # SSH into a specific VM using standard limactl
 limactl shell web-01
@@ -135,7 +135,7 @@ lima-compose destroy lima-compose.yaml
 
 ```bash
 # Get IP addresses and save to file
-lima-compose ips > /tmp/hosts
+lima-compose hosts > /tmp/hosts
 
 # Distribute to all VMs
 for vm in web-01 db-01; do
